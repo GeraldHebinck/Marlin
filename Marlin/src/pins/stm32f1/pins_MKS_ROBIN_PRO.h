@@ -234,7 +234,7 @@
 
 #elif HAS_WIRED_LCD
 
-  #define BEEPER_PIN                        PC5
+  #define BEEPER_PIN                        -1 //PC5
   #define BTN_ENC                           PG2
   #define LCD_PINS_ENABLE                   PG0
   #define LCD_PINS_RS                       PG1
