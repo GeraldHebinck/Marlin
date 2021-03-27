@@ -499,9 +499,9 @@
     #define DEFAULT_Ki_LIST {   1.08,   1.08 }
     #define DEFAULT_Kd_LIST { 114.00, 114.00 }
   #else
-    #define DEFAULT_Kp 11.10
-    #define DEFAULT_Ki 0.63
-    #define DEFAULT_Kd 49.10
+    #define DEFAULT_Kp 10.89
+    #define DEFAULT_Ki 0.71
+    #define DEFAULT_Kd 41.77
   #endif
 #endif // PIDTEMP
 
@@ -540,9 +540,9 @@
 
   // 120V 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
   // from FOPDT model - kp=.39 Tp=405 Tdead=66, Tc set to 79.2, aggressive factor of .15 (vs .1, 1, 10)
-  #define DEFAULT_bedKp 244.21
-  #define DEFAULT_bedKi 45.87
-  #define DEFAULT_bedKd 325.08
+  #define DEFAULT_bedKp 26.57
+  #define DEFAULT_bedKi 4.52
+  #define DEFAULT_bedKd 105.00
 
   // FIND YOUR OWN: "M303 E-1 C8 S90" to run autotune on the bed at 90 degreesC for 8 cycles.
 #endif // PIDTEMPBED
@@ -660,7 +660,7 @@
 #define X_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Y_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
 #define Z_MAX_ENDSTOP_INVERTING false // Set to true to invert the logic of the endstop.
-#define Z_MIN_PROBE_ENDSTOP_INVERTING false // Set to true to invert the logic of the probe.
+#define Z_MIN_PROBE_ENDSTOP_INVERTING true // Set to true to invert the logic of the probe.
 
 /**
  * Stepper Drivers
@@ -746,7 +746,7 @@
  * Override with M92
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80.121, 80.121, 399.778, 432.039 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 428 }
 
 /**
  * Default Max Feed Rate (mm/s)
@@ -766,7 +766,7 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 2000, 2000, 100, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 1500, 1500, 100, 5000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -781,9 +781,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          800    // X, Y, Z and E acceleration for printing moves
-#define DEFAULT_RETRACT_ACCELERATION  10000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   2000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_ACCELERATION          1000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_RETRACT_ACCELERATION  5000    // E acceleration for retracts
+#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves
 
 /**
  * Default Jerk limits (mm/s)
@@ -817,7 +817,7 @@
  *   https://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.01 // (mm) Distance from real junction edge
   #define JD_HANDLE_SMALL_SEGMENTS    // Use curvature estimation instead of just the junction angle
                                       // for small segments (< 1mm) with large junction angles (> 135°).
 #endif
@@ -846,10 +846,10 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 
 // Force the use of the probe for Z-axis homing
-//#define USE_PROBE_FOR_Z_HOMING
+#define USE_PROBE_FOR_Z_HOMING
 
 /**
  * Z_MIN_PROBE_PIN
@@ -904,7 +904,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-//#define BLTOUCH
+#define BLTOUCH
 
 /**
  * Pressure sensor with a BLTouch-like interface
@@ -991,7 +991,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { 10, 10, 0 }
+#define NOZZLE_TO_PROBE_OFFSET { -45, -35, -3.28 }
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1098,7 +1098,7 @@
 // @section extruder
 
 // For direct drive extruder v9 set to true, for geared extruder set to false.
-#define INVERT_E0_DIR false
+#define INVERT_E0_DIR true
 #define INVERT_E1_DIR false
 #define INVERT_E2_DIR false
 #define INVERT_E3_DIR false
@@ -1113,7 +1113,7 @@
 
 //#define UNKNOWN_Z_NO_RAISE      // Don't raise Z (lower the bed) if Z is "unknown." For beds that fall when Z is powered off.
 
-//#define Z_HOMING_HEIGHT  4      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
+#define Z_HOMING_HEIGHT  5      // (mm) Minimal Z height before homing (G28) for Z clearance above the bed, clamps, ...
                                   // Be sure to have this much clearance over your Z_MAX_POS to prevent grinding.
 
 //#define Z_AFTER_HOMING  10      // (mm) Height to move to after homing Z
@@ -1127,8 +1127,8 @@
 // @section machine
 
 // The size of the print bed
-#define X_BED_SIZE 300
-#define Y_BED_SIZE 300
+#define X_BED_SIZE 305
+#define Y_BED_SIZE 305
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1181,7 +1181,7 @@
   #define FIL_RUNOUT_STATE     LOW        // Pin state indicating that filament is NOT present.
   #define FIL_RUNOUT_PULLUP               // Use internal pullup for filament runout pins.
   //#define FIL_RUNOUT_PULLDOWN           // Use internal pulldown for filament runout pins.
-
+//
   // Set one or more commands to execute on filament runout.
   // (After 'M412 H' Marlin will ask the host to handle the process.)
   #define FILAMENT_RUNOUT_SCRIPT "M600"
@@ -1239,9 +1239,9 @@
  */
 //#define AUTO_BED_LEVELING_3POINT
 //#define AUTO_BED_LEVELING_LINEAR
-//#define AUTO_BED_LEVELING_BILINEAR
+#define AUTO_BED_LEVELING_BILINEAR
 //#define AUTO_BED_LEVELING_UBL
-#define MESH_BED_LEVELING
+//#define MESH_BED_LEVELING
 
 /**
  * Normally G28 leaves leveling disabled on completion. Enable
@@ -1286,7 +1286,7 @@
 #if EITHER(AUTO_BED_LEVELING_LINEAR, AUTO_BED_LEVELING_BILINEAR)
 
   // Set the number of grid points per dimension.
-  #define GRID_MAX_POINTS_X 3
+  #define GRID_MAX_POINTS_X 5
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Probe along the Y axis, advancing X after each column
@@ -1319,7 +1319,7 @@
   //#define MESH_EDIT_GFX_OVERLAY   // Display a graphics overlay while editing the mesh
 
   #define MESH_INSET 1              // Set Mesh bounds as an inset region of the bed
-  #define GRID_MAX_POINTS_X 10      // Don't use more than 15 points per axis, implementation limited.
+  #define GRID_MAX_POINTS_X 5      // Don't use more than 15 points per axis, implementation limited.
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   #define UBL_MESH_EDIT_MOVES_Z     // Sophisticated users prefer no movement of nozzle
@@ -1390,7 +1390,7 @@
 // - Move the Z probe (or nozzle) to a defined XY point before Z Homing.
 // - Prevent Z homing when the Z probe is outside bed area.
 //
-//#define Z_SAFE_HOMING
+#define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // X point for Z homing
@@ -1532,8 +1532,8 @@
 
 #if ENABLED(NOZZLE_PARK_FEATURE)
   // Specify a park position as { X, Y, Z_raise }
-  #define NOZZLE_PARK_POINT { (X_MIN_POS + 10), (Y_MAX_POS - 10), 20 }
-  //#define NOZZLE_PARK_X_ONLY          // X move only is required to park
+  #define NOZZLE_PARK_POINT { (X_MIN_POS), (Y_MAX_POS), 20 }
+  #define NOZZLE_PARK_X_ONLY          // X move only is required to park
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
@@ -1729,7 +1729,7 @@
  * SD Card support is disabled by default. If your controller has an SD slot,
  * you must uncomment the following option or it won't work.
  */
-//#define SDSUPPORT
+#define SDSUPPORT
 
 /**
  * SD CARD: SPI SPEED
@@ -1990,7 +1990,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-//#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // ReprapWorld Graphical LCD
