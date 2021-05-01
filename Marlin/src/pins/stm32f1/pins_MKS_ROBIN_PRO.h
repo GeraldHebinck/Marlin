@@ -136,22 +136,25 @@
   // Software serial
   //
   #define X_SERIAL_TX_PIN                   PF7
-  #define X_SERIAL_RX_PIN                   PF8
+  #define X_SERIAL_RX_PIN                   X_SERIAL_TX_PIN //PF8
 
   #define Y_SERIAL_TX_PIN                   PF4
-  #define Y_SERIAL_RX_PIN                   PF3
+  #define Y_SERIAL_RX_PIN                   Y_SERIAL_TX_PIN //PF3
 
   #define Z_SERIAL_TX_PIN                   PF5
-  #define Z_SERIAL_RX_PIN                   PF6
+  #define Z_SERIAL_RX_PIN                   Z_SERIAL_TX_PIN //PF6
 
   #define E0_SERIAL_TX_PIN                  PG13
-  #define E0_SERIAL_RX_PIN                  PG15
+  #define E0_SERIAL_RX_PIN                  E0_SERIAL_TX_PIN //PG15
 
   #define E1_SERIAL_TX_PIN                  PG12
-  #define E1_SERIAL_RX_PIN                  PG10
+  #define E1_SERIAL_RX_PIN                  E1_SERIAL_TX_PIN //PG10
 
   #define E2_SERIAL_TX_PIN                  PC13
-  #define E2_SERIAL_RX_PIN                  PG9
+  #define E2_SERIAL_RX_PIN                  E2_SERIAL_TX_PIN //PG9
+  
+  // Reduce baud rate to improve software serial reliability
+  #define TMC_BAUD_RATE                    19200
 #endif
 
 //
