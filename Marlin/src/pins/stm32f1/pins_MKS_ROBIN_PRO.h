@@ -38,10 +38,17 @@
 //
 #define DISABLE_DEBUG
 
-//
+//#define  SDCARD_EEPROM_EMULATION
+
+#define SPI_EEPROM
+#define SPI_CHAN_EEPROM1                        2
+#define SPI_EEPROM1_CS                          PB12 
+#define MARLIN_EEPROM_SIZE 						0x1000   // 4KB
+#define E2END 									0xFFF
+
 // Note: MKS Robin board is using SPI2 interface.
 //
-//#define SPI_MODULE                           2
+#define SPI_MODULE                           2
 #define ENABLE_SPI2
 
 //
@@ -103,6 +110,17 @@
 #ifndef E2_CS_PIN
   #define E2_CS_PIN                         PG9
 #endif
+
+//SPI FLASH
+#define SPI_FLASH
+#define HAS_SPI_FLASH                          1
+#if ENABLED(SPI_FLASH)
+	#define 	W25QXX_CS_PIN		  	PB12
+	#define 	W25QXX_MOSI_PIN			PB15
+	#define 	W25QXX_MISO_PIN			PB14
+	#define 	W25QXX_SCK_PIN			PB13
+#endif
+
 //
 // Software SPI pins for TMC2130 stepper drivers
 //
